@@ -238,6 +238,23 @@ body {
     align-items: center;
 }
 
+.about-image {
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 102, 204, 0.2);
+    transition: var(--transition);
+}
+
+.about-image img:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 102, 204, 0.3);
+}
+
 .about-text p {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
@@ -821,26 +838,31 @@ body {
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>Welcome! I'm a passionate medical student committed to excellence in healthcare and patient care. With a strong foundation in medical sciences and clinical practice, I'm continuously expanding my knowledge and skills to become a competent and compassionate physician.</p>
-                    <p>My journey in medicine is driven by a genuine desire to make a positive impact on people's lives and contribute to the advancement of healthcare.</p>
+                <div class="about-image">
+                    <img src="IMG_8966.JPG" alt="Ajamsaadx - Medical Student Portrait">
                 </div>
-                <div class="stats">
-                    <div class="stat-box">
-                        <h3>4+</h3>
-                        <p>Years Study</p>
+                <div>
+                    <div class="about-text">
+                        <p>Welcome! I'm a passionate medical student committed to excellence in healthcare and patient care. With a strong foundation in medical sciences and clinical practice, I'm continuously expanding my knowledge and skills.</p>
+                        <p>My journey in medicine is driven by a genuine desire to make a positive impact on people's lives and contribute to the advancement of healthcare.</p>
                     </div>
-                    <div class="stat-box">
-                        <h3>50+</h3>
-                        <p>Cases Managed</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>100%</h3>
-                        <p>Dedication</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3>15+</h3>
-                        <p>Certifications</p>
+                    <div class="stats">
+                        <div class="stat-box">
+                            <h3>4+</h3>
+                            <p>Years Study</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>50+</h3>
+                            <p>Cases Managed</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>100%</h3>
+                            <p>Dedication</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>15+</h3>
+                            <p>Certifications</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1006,10 +1028,10 @@ body {
                 </form>
             </div>
             <div class="social-links">
-                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
                 <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </section>
@@ -1017,15 +1039,69 @@ body {
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Ajamsaadx. All rights reserved. | Medical Student Portfolio</p>
+            <p>&copy; 2026 Ajamsaadx. All rights reserved.</p>
         </div>
     </footer>
 
     <!-- Scroll to Top Button -->
     <button class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
+        <i class="fas fa-chevron-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Scroll to top button functionality
+        const scrollTop = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Set active nav link based on scroll position
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
